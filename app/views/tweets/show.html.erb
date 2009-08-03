@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>tweet</th>
+    <th>autor</th>
+  </tr>
+<% for tweet in @tweets %>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td> <%= tweet.message %> </td>
+    <td>
+      <%= tweet.user.login %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'Back', :back %>

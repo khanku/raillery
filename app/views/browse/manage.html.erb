@@ -1,0 +1,28 @@
+<%= link_to '< back', :root %>
+<br /><br />
+
+<table id='picture-list'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Path</th>
+    <th>Thumbnail</th>
+    <th>actions</th>
+  </tr>
+<% for picture in @pictures %>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td> <%=h picture.id %> </td>
+    <td> <%= link_to (h picture.name), picture_path(picture) %> </td>
+    <td> <%=h picture.path %> </td>
+    <td>
+      <%= link_to '<img src="' + get_pics_root + picture.thumb_path + '" />',
+                  picture_path(picture) %>
+    </td>
+    <td>
+      <%= link_to 'terminate', terminate_picture_path(picture),
+          :confirm => 'Are you sure about that?',
+          :method => :post %>
+    </td>
+  </tr>
+<% end %>
+</table>
