@@ -4,7 +4,7 @@ class AddDefaultSettings < ActiveRecord::Migration
 
     Setting.create(
       :key => 'thumb_width',
-      :value => '50'
+      :value => '100'
     )
 
     Setting.create(
