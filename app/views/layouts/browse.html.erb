@@ -18,7 +18,9 @@
 
    <%= render :partial => "top_board" %>
 
-    <p style="color: green"><%= flash[:notice] %></p>
+    <div id="notice">
+      <p><%= flash[:notice] %></p>
+    </div>
 
   <%= yield  %>
 

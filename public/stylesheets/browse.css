@@ -1,19 +1,12 @@
 body { padding-top: 10px; }
 
-#notice {
-  border: 2px solid red;
-  padding: 1em;
-  margin-bottom: 2em;
-  background-color: #f0f0f0;
-  font: bold smaller sans-serif;
-}
-
 h1 {
   font: 150% sans-serif;
   color: #226;
   border-bottom: 3px dotted #77d;
 }
 
+table { border: 0; }
 img { border: 0; }
 
 
@@ -21,10 +14,6 @@ img { border: 0; }
 
 #pitcure-list .list-line-even {
   background: #e0f8f8;
-}
-
-td {
-  text-align: center;
 }
 
 #picture-list .list-line-odd {
@@ -59,4 +48,11 @@ td {
   padding: 10px 0 10px 0;
   width: 600px;
   border: 2px dotted #77d;
+}
+
+#notice p { color: green; }
+
+#div_ajax {
+  text-align: center;
+  font-size: 80%;
 }

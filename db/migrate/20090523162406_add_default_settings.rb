@@ -12,6 +12,16 @@ class AddDefaultSettings < ActiveRecord::Migration
       :value => 'public/pics'
     )
 
+    Setting.create(
+      :key => 'pictures_in_a_row',
+      :value => '5'
+    )
+
+    Setting.create(
+      :key => 'pictures_per_page',
+      :value => '25'
+    )
+
   end
 
   def self.down
