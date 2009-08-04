@@ -1,0 +1,15 @@
+<div id="top-board">
+
+  <div id="userbox">
+    <% if logged_in? %>
+    Welcome back, 
+      <%= self.current_user.login + '!' %>
+      (<%= link_to 'logout', logout_path %>)
+    <% else %>
+      Hello, you could
+      <%= link_to 'login', login_path %>
+      or <%= link_to 'register', new_user_path %>.
+    <% end %>
+  </div>
+
+</div>
