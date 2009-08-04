@@ -1,32 +1,9 @@
-body { padding-top: 10px; }
-
-h1 {
-  font: 150% sans-serif;
-  color: #226;
-  border-bottom: 3px dotted #77d;
-}
-
-table { border: 0; }
-img { border: 0; }
-
-
-/* Styles for browse/index */
-
-#pitcure-list .list-line-even {
-  background: #e0f8f8;
-}
-
-#picture-list .list-line-odd {
-  background: #ccffcc;
-}
-
-
 /* top board */
 
 #top-board {
   margin: 0;
   padding: 5px 0 5px 0;
-  min-width: 600px;
+  min-width: 650px;
   position: absolute;
   left: 0;
   top: 0;
@@ -53,6 +30,14 @@ img { border: 0; }
 #notice p { color: green; }
 
 #div_ajax {
-  text-align: center;
+  text-align: left;
   font-size: 80%;
+  line-height:1.7em;
+  margin:auto;
+  width:350px;
+  margin-top: 20px;
+}
+
+#div_ajax div {
+  float: left;
 }

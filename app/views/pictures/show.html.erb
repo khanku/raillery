@@ -1,3 +1,5 @@
-<img src="<%= get_pics_root + @picture.path %>" />
-<br />
-Name: <%= @picture.name %>
+<div align="center">
+  <%= image_tag(get_pics_root + @picture.path) %>
+  <br /><br />
+  <u><%= @picture.name %></u>
+</div>

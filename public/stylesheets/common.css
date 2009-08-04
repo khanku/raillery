@@ -1,0 +1,19 @@
+body { padding-top: 10px; }
+
+h1 {
+  font: 150% sans-serif;
+  color: #226;
+  border-bottom: 3px dotted #77d;
+}
+
+table { border: 0; }
+img { border: 0; }
+
+
+#pitcure-list .list-line-even {
+  background: #e0f8f8;
+}
+
+#picture-list .list-line-odd {
+  background: #ccffcc;
+}
