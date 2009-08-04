@@ -15,7 +15,10 @@
   </head>
 
   <body>
-      <p style="color: green"><%= flash[:notice] %></p>
+
+   <%= render :partial => "top_board" %>
+
+    <p style="color: green"><%= flash[:notice] %></p>
 
   <%= yield  %>
 
