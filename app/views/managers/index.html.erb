@@ -1,7 +1,14 @@
+< <%= link_to 'home', :root %>
+<br /><br />
+
 <% if logged_in? %>
   <div id="user-actions">
     <%= link_to 'upload a picture', new_picture_path %>
     <br />
+    import a folder (coming soon)
+    <br />
+    download from URL (coming soon)
+    <br /><br />
     <%= link_to 'manage your pictures', own_managers_path %>
   </div>
 <% end %>
