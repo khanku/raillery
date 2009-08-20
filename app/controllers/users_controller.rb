@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @username = user.login
 
     @pictures = user.pictures
-    @pictures_in_a_row = get_setting('pictures_per_page')
+    @pictures_in_a_row = get_setting('pictures_in_a_row')
   end
 
 end
