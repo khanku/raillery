@@ -1,28 +1,30 @@
-< <%= link_to 'back to the manager', managers_path %>
-<br /><br />
+<h1>
+  your pictures:
+</h1>
 
-<table id='picture-list'>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Path</th>
-    <th>Thumbnail</th>
-    <th>actions</th>
-  </tr>
+<div align="center">
+  <div id="images-frame">
+
+<% number_of_pictures = 0 %>
 <% for picture in @pictures %>
-  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
-    <td> <%=h picture.id %> </td>
-    <td> <%= link_to (h picture.name), picture_path(picture) %> </td>
-    <td> <%=h picture.path %> </td>
-    <td>
-      <%= link_to '<img src="' + get_pics_root + picture.thumb_path + '" />',
-                  picture_path(picture) %>
-    </td>
-    <td>
-      <%= link_to 'terminate', terminate_picture_path(picture),
-          :confirm => 'Are you sure about that?',
-          :method => :post %>
-    </td>
-  </tr>
+<% number_of_pictures += 1 %>
+
+    <%= link_to image_tag(get_pics_root + picture.thumb_path),
+        get_pics_root + picture.path,
+        { :rel => "lightbox[pictures]", :title => picture.name } %>
+    <%= link_to image_tag("details.png"), picture_path(picture) %>
+    <span style="position: relative; top: -18px; left: -25px">
+      <%= link_to image_tag("delete.png"), terminate_picture_path(picture),
+            :confirm => 'Are you sure about that?',
+            :method => :post %>
+    </span>
+    &nbsp;&nbsp;
+
+<% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>
+  <br />
 <% end %>
-</table>
+
+<% end %>
+
+  </div>
+</div>

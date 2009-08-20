@@ -11,10 +11,13 @@
       'lightbox/lightbox.js' %>
 
     <%= stylesheet_link_tag 'common' %>
+    <%= stylesheet_link_tag 'managers' %>
     <%= stylesheet_link_tag 'lightbox' %>
   </head>
 
   <body>
+
+   <%= render :partial => "shared/top_board" %>
 
     <div id="notice">
       <p><%= flash[:notice] %></p>

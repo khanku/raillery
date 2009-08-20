@@ -6,7 +6,8 @@ class ManagersController < ApplicationController
 
   def own
     if logged_in?
-      @pictures = Picture.find_all_by_user_id(self.current_user.id, :order => "created_at DESC")
+      @pictures = self.current_user.pictures
+      @pictures_in_a_row = get_setting('pictures_per_page')
     end
   end
 

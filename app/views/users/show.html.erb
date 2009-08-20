@@ -12,7 +12,7 @@
     <%= link_to image_tag(get_pics_root + picture.thumb_path),
         get_pics_root + picture.path,
         { :rel => "lightbox[pictures]", :title => picture.name } %>
-    <%= link_to image_tag("details.jpg"), picture_path(picture) %>
+    <%= link_to image_tag("details.png"), picture_path(picture) %>
     &nbsp;&nbsp;
 
 <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>

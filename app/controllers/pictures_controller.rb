@@ -80,7 +80,7 @@ class PicturesController < ApplicationController
         flash[:notice] += @errors
       end
       flash[:notice] += "Picture deleted successfully!"
-      redirect_to :action => 'manage', :controller => 'browse'
+      redirect_to :controller => 'managers', :action => 'own'
     else
       flash[:notice] = "Sorry, this picture doesn't belong to you."
     end
