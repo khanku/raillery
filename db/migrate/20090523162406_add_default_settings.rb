@@ -19,12 +19,12 @@ class AddDefaultSettings < ActiveRecord::Migration
 
     Setting.create(
       :key => 'pictures_in_a_row',
-      :value => '5'
+      :value => '4'
     )
 
     Setting.create(
       :key => 'pictures_per_page',
-      :value => '25'
+      :value => '20'
     )
 
   end

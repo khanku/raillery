@@ -45,7 +45,7 @@ img { border: 0; }
 
 #images-frame {
   padding: 10px 0 10px 0;
-  width: 600px;
+  width: auto;
   border: 2px dotted #77d;
 }
 
