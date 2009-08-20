@@ -20,7 +20,7 @@ class AddTestData < ActiveRecord::Migration
       :name => 'fake',
       :path => 'fake.jpg',
       :thumb_path => 'thumb/fake.jpg',
-      :user_id => 2
+      :user_id => 1
     )
 
   end

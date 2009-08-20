@@ -3,13 +3,18 @@ class AddDefaultSettings < ActiveRecord::Migration
     Setting.delete_all
 
     Setting.create(
+      :key => 'public_pictures_directory',
+      :value => 'public/pics/'
+    )
+
+    Setting.create(
       :key => 'thumb_width',
       :value => '100'
     )
 
     Setting.create(
-      :key => 'public_pictures_directory',
-      :value => 'public/pics'
+      :key => 'thumb_path_prefix',
+      :value => 'thumb/'
     )
 
     Setting.create(

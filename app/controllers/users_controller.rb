@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
+  layout "users", :only => :show
 
   # render new.rhtml
   def new
@@ -22,6 +23,14 @@ class UsersController < ApplicationController
     else
       render :action => 'new'
     end
+  end
+
+  def show
+    user = User.find(params[:id])
+    @username = user.login
+
+    @pictures = user.pictures
+    @pictures_in_a_row = get_setting('pictures_per_page')
   end
 
 end

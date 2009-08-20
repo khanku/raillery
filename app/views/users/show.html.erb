@@ -1,4 +1,6 @@
-<h1>Browsing: everything</h1>
+<h1>
+  <%= @username %>'s pictures:
+</h1>
 
 <div align="center">
   <div id="images-frame">
@@ -10,12 +12,7 @@
     <%= link_to image_tag(get_pics_root + picture.thumb_path),
         get_pics_root + picture.path,
         { :rel => "lightbox[pictures]", :title => picture.name } %>
-    <span style="position: relative; left: 2px;">
-      <%= link_to image_tag("details.png"), picture_path(picture) %>
-    </span>
-    <span style="position: relative; top: -18px; left: -25px">
-      <%= link_to image_tag("user.png"), user_path(picture.user.id) %>
-    </span>
+    <%= link_to image_tag("details.jpg"), picture_path(picture) %>
     &nbsp;&nbsp;
 
 <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>

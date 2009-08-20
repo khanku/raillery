@@ -13,28 +13,33 @@ class PicturesController < ApplicationController
   end
 
   def create
+    file_upload = params[:file]
+
+    File.open(path_to_picture(file_upload.original_filename), 'w') do |fh|
+      fh.write(file_upload.read)
+    end
+
+    store(file_upload.original_filename, params[:image][:name])
+  end
+
+  def import
+    
+  end
+
+  def download
+    
+  end
+
+  def store(file_to_store, picture_name)
     require 'RMagick'
 
     # TODO: checks
     # MIME ?
 
-    file_upload = params[:file]
-    pic_path = Rails.root.join(get_setting('public_pictures_directory'),
-                               file_upload.original_filename)
-
-    File.open(pic_path, 'w') do |fh|
-      fh.write(file_upload.read)
-    end
-
-    thumb_path = Rails.root.join(
-      get_setting('public_pictures_directory'),
-      'thumb/',
-      file_upload.original_filename
-    )
     begin
-      thumb = Magick::ImageList.new(pic_path)
+      thumb = Magick::ImageList.new(path_to_picture(file_to_store))
       thumb.crop_resized!(get_setting('thumb_width').to_i)
-      thumb.write(thumb_path)
+      thumb.write(path_to_thumbnail(file_to_store))
     rescue Exception => e
       puts e.message
 
@@ -42,14 +47,14 @@ class PicturesController < ApplicationController
       redirect_to :action => 'new'
     end
 
-    unless FileTest.exist?(thumb_path)
+    unless FileTest.exist?(path_to_thumbnail(file_to_store))
       return false;
     end
 
     pic = Picture.create(
-      :name => params[:image][:name] || 'n/a',
-      :path => file_upload.original_filename,
-      :thumb_path => 'thumb/' + file_upload.original_filename,
+      :name => picture_name || 'none',
+      :path => file_to_store,
+      :thumb_path => get_setting('thumb_path_prefix') + file_to_store,
       :user_id => self.current_user.id
     )
     pic.save!
@@ -83,6 +88,22 @@ class PicturesController < ApplicationController
 
   def show
     @picture = Picture.find(params[:id])
+    @user = @picture.user
   end
 
+  protected
+  def path_to_picture(picture_name)
+    Rails.root.join(
+      get_setting('public_pictures_directory'),
+      picture_name
+    )
+  end
+  
+  def path_to_thumbnail(thumbnail_name)
+    Rails.root.join(
+      get_setting('public_pictures_directory'),
+      get_setting('thumb_path_prefix'),
+      thumbnail_name
+    )
+  end
 end

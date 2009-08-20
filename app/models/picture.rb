@@ -4,4 +4,5 @@ class Picture < ActiveRecord::Base
 
   validates_presence_of   :name, :path, :thumb_path, :user_id
   validates_uniqueness_of :path, :thumb_path
+
 end
