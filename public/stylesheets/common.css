@@ -6,6 +6,11 @@ h1 {
   border-bottom: 3px dotted #77d;
 }
 
+h2 {
+  font: 120% sans-serif;
+  color: #77d;
+}
+
 table { border: 0; }
 img { border: 0; }
 
@@ -52,7 +57,13 @@ img { border: 0; }
 
 /* notice box */
 
-#notice p { color: green; }
+#notice {
+  background-color: #ddddff;
+  color: #000000;
+  position: relative;
+  top: 10px;
+  padding: 5px 10px 5px 10px;
+}
 
 
 /* ajax box */
