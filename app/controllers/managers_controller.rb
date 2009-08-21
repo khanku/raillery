@@ -6,8 +6,23 @@ class ManagersController < ApplicationController
 
   def own
     if logged_in?
-      @pictures = self.current_user.pictures
-      @pictures_in_a_row = get_setting('pictures_per_page')
+      @page = params[:page].to_i ||= 1
+      if (@page < 1)
+        @page = 1
+      end
+      
+      pictures_per_page = get_setting('pictures_per_page').to_i
+      offset = (@page - 1) * pictures_per_page
+      @previous_page = @page - 1
+      @next_page = @page + 1
+      @last_page = 99
+      
+      @pictures = Picture.find(:all,
+                               :order => "created_at DESC",
+                               :limit => pictures_per_page,
+                               :offset => offset
+                              )
+      @pictures_in_a_row = get_setting('pictures_in_a_row')
     end
   end
 

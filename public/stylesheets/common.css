@@ -69,3 +69,12 @@ img { border: 0; }
 #div_ajax div {
   float: left;
 }
+
+
+/* pages navigation */
+
+#pages-navigation { padding-top: 10px; }
+
+#pages-navigation a { color: #000; text-decoration: none; }
+#pages-navigation a:visited { color: #666; }
+#pages-navigation a:hover { color: #fff; background-color:#000; }

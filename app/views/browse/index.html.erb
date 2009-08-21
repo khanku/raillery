@@ -1,36 +1,37 @@
 <h1>Browsing: everything</h1>
 
 <div align="center">
+
+<% if @pictures.size == 0%>
+  <i>No pictures found.</i>
+<% else %>
+
   <div id="images-frame">
 
-<% number_of_pictures = 0 %>
-<% for picture in @pictures %>
-<% number_of_pictures += 1 %>
+  <% number_of_pictures = 0 %>
+  <% for picture in @pictures %>
+  <% number_of_pictures += 1 %>
 
-    <%= link_to image_tag(get_pics_root + picture.thumb_path),
-        get_pics_root + picture.path,
-        { :rel => "lightbox[pictures]", :title => picture.name } %>
-    <span style="position: relative; left: 2px;">
-      <%= link_to image_tag("details.png"), picture_path(picture) %>
-    </span>
-    <span style="position: relative; top: -18px; left: -25px">
-      <%= link_to image_tag("user.png", :alt => picture.user.login), user_path(picture.user.id) %>
-    </span>
+      <%= link_to image_tag(get_pics_root + picture.thumb_path),
+          get_pics_root + picture.path,
+          { :rel => "lightbox[pictures]", :title => picture.name } %>
+      <span style="position: relative; left: 2px;">
+        <%= link_to image_tag("details.png"), picture_path(picture) %>
+      </span>
+      <span style="position: relative; top: -18px; left: -25px">
+        <%= link_to image_tag("user.png", :alt => picture.user.login), user_path(picture.user.id) %>
+      </span>
 
-<% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>
-  <br />
+  <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>
+      <br />
+  <% end %>
+
+  <% end %>
+
+    </div>
+
+    <%= render :partial => "shared/pages_navigation" %>
+
 <% end %>
-
-<% end %>
-
-  </div>
-
-  <div id="pages-navigation">
-    <%= link_to '&lt;&lt;', '?page=1' %>
-    <%= link_to '&lt;', "?page=#{@previous_page}" %>
-    [<%= @page %>]
-    <%= link_to '&gt;', "?page=#{@next_page}" %>
-    <%= link_to '&gt;&gt;', "?page=#{@last_page}" %>
-  </div>
 
 </div>
