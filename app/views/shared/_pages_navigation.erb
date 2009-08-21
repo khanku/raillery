@@ -1,0 +1,7 @@
+    <div id="pages-navigation">
+      <%= link_to '&lt;&lt;', '?page=1' %>
+      <%= link_to '&lt;', "?page=#{@previous_page}" %>
+      [<%= @page %>]
+      <%= link_to '&gt;', "?page=#{@next_page}" %>
+      <%= link_to '&gt;&gt;', "?page=#{@last_page}" %>
+    </div>
