@@ -8,9 +8,6 @@ class BrowseController < ApplicationController
 
     pictures_per_page = get_setting('pictures_per_page').to_i
     offset = (@page - 1) * pictures_per_page
-    @previous_page = @page - 1
-    @next_page = @page + 1
-    @last_page = 99
 
     @pictures = Picture.find(:all,
                              :order => "created_at DESC",
