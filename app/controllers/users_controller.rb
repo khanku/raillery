@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  layout "users", :only => :show
+  layout "users", :except => :new
 
   # render new.rhtml
   def new
