@@ -33,4 +33,7 @@ class UsersController < ApplicationController
     @pictures_in_a_row = get_setting('pictures_in_a_row')
   end
 
+  def index
+    
+  end
 end

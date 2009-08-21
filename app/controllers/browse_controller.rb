@@ -6,15 +6,16 @@ class BrowseController < ApplicationController
       @page = 1
     end
 
-    pictures_per_page = get_setting('pictures_per_page').to_i
-    offset = (@page - 1) * pictures_per_page
+    @pictures_per_page = get_setting('pictures_per_page').to_i
+    offset = (@page - 1) * @pictures_per_page
 
     @pictures = Picture.find(:all,
-                             :order => "created_at DESC",
-                             :limit => pictures_per_page,
+                             :order  => "created_at DESC",
+                             :limit  => @pictures_per_page,
                              :offset => offset
                             )
-    @pictures_in_a_row = get_setting('pictures_in_a_row')
+    @total_pictures = @pictures.count
+    @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
   end
 
 end

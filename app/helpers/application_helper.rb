@@ -8,11 +8,11 @@ module ApplicationHelper
   def draw_pages_navigation
     str = '<div id="pages-navigation">'
 
-    if @page > 2
+    if (@page > 2)
       str += link_to '&lt;&lt;', '?page=1'
       str += "\n"
     end
-    if @page > 1
+    if (@page > 1)
       str += link_to '&lt;', "?page=#{@page - 1}"
       str += "\n"
     end
@@ -20,12 +20,14 @@ module ApplicationHelper
     str += "[#{@page}]"
     str += "\n"
 
-    if true
+    last_page = @total_pictures / @pictures_per_page + 1
+
+    if (@page < last_page)
       str += link_to '&gt;', "?page=#{@page + 1}"
       str += "\n"
     end
-    if true
-      str += link_to '&gt;&gt;', "?page=99"
+    if (@page < last_page - 1)
+      str += link_to '&gt;&gt;', "?page=#{last_page}"
       str += "\n"
     end
 

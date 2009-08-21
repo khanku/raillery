@@ -24,7 +24,7 @@
         <%= link_to image_tag("user.png", :alt => picture.user.login), user_path(picture.user.id) %>
       </span>
 
-  <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>
+  <% if (number_of_pictures % @pictures_in_a_row == 0) %>
       <br />
   <% end %>
 
