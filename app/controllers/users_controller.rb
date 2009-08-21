@@ -34,6 +34,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    
+   @users_count = User.count 
   end
 end

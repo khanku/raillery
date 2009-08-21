@@ -20,7 +20,7 @@ module ApplicationHelper
     str += "[#{@page}]"
     str += "\n"
 
-    last_page = @total_pictures / @pictures_per_page + 1
+    last_page = @pictures_count / @pictures_per_page + 1
 
     if (@page < last_page)
       str += link_to '&gt;', "?page=#{@page + 1}"
