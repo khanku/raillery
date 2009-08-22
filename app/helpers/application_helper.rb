@@ -17,8 +17,10 @@ module ApplicationHelper
       str += "\n"
     end
 
-    str += "[#{@page}]"
-    str += "\n"
+    if(@page > 1)
+      str += "[#{@page}]"
+      str += "\n"
+    end
 
     last_page = @pictures_count / @pictures_per_page + 1
 
