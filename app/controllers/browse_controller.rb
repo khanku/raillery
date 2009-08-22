@@ -14,7 +14,7 @@ class BrowseController < ApplicationController
                              :limit  => @pictures_per_page,
                              :offset => offset
                             )
-    @pictures_count = @pictures.count
+    @pictures_count = Picture.count
     @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
   end
 
