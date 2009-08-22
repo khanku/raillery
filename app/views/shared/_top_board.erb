@@ -2,7 +2,8 @@
 
   <div id="userbox">
     <span style="position: relative; left: -50px;">
-      <<%= link_to 'home', :root %>
+      <%= link_to image_tag('home.png'), :root %>
+      <%= link_to 'home', :root %>
     </span>
 
     <% if logged_in? %>
