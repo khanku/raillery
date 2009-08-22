@@ -18,7 +18,7 @@
         get_pics_root + picture.path,
         { :rel => "lightbox[pictures]", :title => picture.name } %>
     <%= link_to image_tag("details.png"), picture_path(picture) %>
-    <span style="position: relative; top: -18px; left: -25px">
+    <span style="position: relative; top: -22px; left: -21px">
       <%= link_to image_tag("delete.png"), terminate_picture_path(picture),
             :confirm => 'Are you sure about that?',
             :method => :post %>
