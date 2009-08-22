@@ -17,12 +17,12 @@ module ApplicationHelper
       str += "\n"
     end
 
-    if(@page > 1)
+    last_page = @pictures_count / @pictures_per_page + 1
+
+    if(@page > 1 || last_page > 1)
       str += "[#{@page}]"
       str += "\n"
     end
-
-    last_page = @pictures_count / @pictures_per_page + 1
 
     if (@page < last_page)
       str += link_to '&gt;', "?page=#{@page + 1}"
