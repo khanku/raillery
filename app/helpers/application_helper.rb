@@ -33,4 +33,13 @@ module ApplicationHelper
 
     str
   end
+
+  def show_flash(options={})
+    options = {:fade => 2, :display => 5, :highlight => true}.merge(options)
+    html = content_tag(:span, flash.collect{ |key,msg| content_tag(:span, msg, :class => key, :attributes => "style = display: none;") }, :id => 'notice')
+    html << content_tag(:script, "new Effect.Highlight('notice');") if options[:highlight]
+    html << content_tag(:script, "$('notice').appear();")
+    html << content_tag(:script, "setTimeout(\"$('notice').fade({duration: #{options[:fade]}});\", #{options[:display]*1000});")
+  end
+
 end
