@@ -21,7 +21,6 @@ module ApplicationHelper
 
     if(@page > 1 || last_page > 1)
       str += "[#{@page}]"
-      str += "(#{last_page} pages totalizing #{pictures_count} pictures"
       str += "\n"
     end
 
@@ -31,6 +30,11 @@ module ApplicationHelper
     end
     if (@page < last_page - 1)
       str += link_to '&gt;&gt;', "?page=#{last_page}"
+      str += "\n"
+    end
+
+    if(@page > 1 || last_page > 1)
+      str += "(#{last_page} pages totalizing #{@pictures_count} pictures)"
       str += "\n"
     end
 
