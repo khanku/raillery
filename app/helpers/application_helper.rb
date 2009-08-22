@@ -21,6 +21,7 @@ module ApplicationHelper
 
     if(@page > 1 || last_page > 1)
       str += "[#{@page}]"
+      str += "(#{last_page} pages totalizing #{pictures_count} pictures"
       str += "\n"
     end
 
