@@ -11,6 +11,17 @@
     <%= stylesheet_link_tag 'common' %>
     <%= stylesheet_link_tag 'pictures' %>
 
+    <script type="text/javascript">
+    window.onload = function() {
+      var obj = document.getElementById('wrap').getElementsByTagName('img');
+      for (var start=0; start<obj.length; start++) {
+        obj[start].onclick = function() {
+          this.className = (this.className != 'small') ? 'small' : 'large';
+        }
+      }
+    }
+    </script>
+
   </head>
 
   <body>
