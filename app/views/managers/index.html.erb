@@ -4,7 +4,7 @@
 
       <ul>
         <li>
-          <%= link_to image_tag("upload.png"), new_picture_path %>
+          <%= link_to image_tag('upload.png'), new_picture_path %>
           <%= link_to 'upload a picture', new_picture_path %>
         </li>
 
@@ -12,8 +12,9 @@
         <li>import a folder (<i>coming soon</i>)</li>
         <li>download from URL (<i>coming soon</i>)</li>
 
-        <br />
+        <br /><br />
         <li>
+          <%= link_to image_tag('manager.png'), own_managers_path %>
           <%= link_to 'manage your pictures', own_managers_path %>
         </li>
       </ul>
