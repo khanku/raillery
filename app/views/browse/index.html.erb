@@ -14,12 +14,14 @@
   <% for picture in @pictures %>
   <% number_of_pictures += 1 %>
 
-      <%= link_to image_tag(get_pics_root + picture.thumb_path),
-          get_pics_root + picture.path,
-          { :rel => "lightbox[pictures]", :title => picture.name } %>
+      <%= link_to image_tag(pictures_thumb_dir + "#{picture.user.login}/#{picture.filename}"),
+            pictures_root_dir + "#{picture.user.login}/#{picture.filename}",
+            { :rel => "lightbox[pictures]", :title => picture.name } %>
+
       <span style="position: relative; left: 2px;">
         <%= link_to image_tag("details.png"), picture_path(picture) %>
       </span>
+
       <span style="position: relative; top: -18px; left: -25px">
         <%= link_to image_tag("user.png", :alt => picture.user.login), user_path(picture.user.id) %>
       </span>

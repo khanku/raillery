@@ -4,22 +4,19 @@ class AddTestData < ActiveRecord::Migration
 
     Picture.create(
       :name => 'jolie image',
-      :path => 'image.png',
-      :thumb_path => 'thumb/image.png',
+      :filename => 'image.png',
       :user_id => 1
     )
 
     Picture.create(
       :name => 'photo herbe',
-      :path => 'herbe.jpg',
-      :thumb_path => 'thumb/herbe.jpg',
+      :filename => 'herbe.jpg',
       :user_id => 1
     )
 
     Picture.create(
       :name => 'fake',
-      :path => 'fake.jpg',
-      :thumb_path => 'thumb/fake.jpg',
+      :filename => 'fake.jpg',
       :user_id => 1
     )
 

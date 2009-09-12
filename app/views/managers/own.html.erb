@@ -14,12 +14,13 @@
   <% for picture in @pictures %>
   <% number_of_pictures += 1 %>
 
-    <%= link_to image_tag(get_pics_root + picture.thumb_path),
-        get_pics_root + picture.path,
-        { :rel => "lightbox[pictures]", :title => picture.name } %>
+    <%= link_to image_tag(pictures_thumb_dir + "#{picture.user.login}/#{picture.filename}"),
+          pictures_root_dir + "#{picture.user.login}/#{picture.filename}",
+          { :rel => "lightbox[pictures]", :title => picture.name } %>
     <%= link_to image_tag("details.png"), picture_path(picture) %>
+
     <span style="position: relative; top: -22px; left: -21px">
-      <%= link_to image_tag("delete.png"), terminate_picture_path(picture),
+      <%= link_to image_tag('delete.png'), terminate_picture_path(picture),
             :confirm => 'Are you sure about that?',
             :method => :post %>
     </span>

@@ -13,8 +13,7 @@ ActiveRecord::Schema.define(:version => 20090524101307) do
 
   create_table "pictures", :force => true do |t|
     t.string   "name"
-    t.string   "path"
-    t.string   "thumb_path"
+    t.string   "filename"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

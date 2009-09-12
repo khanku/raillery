@@ -2,8 +2,7 @@ class CreatePictures < ActiveRecord::Migration
   def self.up
     create_table :pictures do |t|
       t.string  :name
-      t.string  :path
-      t.string  :thumb_path
+      t.string  :filename
       t.integer :user_id
 
       t.timestamps

@@ -1,8 +1,12 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def get_pics_root
+  def pictures_root_dir
     '/pics/'
+  end
+
+  def pictures_thumb_dir
+    '/pics/thumb/'
   end
 
   def draw_pages_navigation
@@ -48,7 +52,10 @@ module ApplicationHelper
 
   def show_flash(options={})
     options = {:fade => 2, :display => 5, :highlight => true}.merge(options)
-    html = content_tag(:span, flash.collect{ |key,msg| content_tag(:span, msg, :class => key, :attributes => "style = display: none;") }, :id => 'notice')
+    html = content_tag(:span, flash.collect { |key,msg|
+      content_tag(:span, msg, :class => key,
+                  :attributes => "style = display: none;") },
+                  :id => 'notice')
     html << content_tag(:script, "new Effect.Highlight('notice');") if options[:highlight]
     html << content_tag(:script, "$('notice').appear();")
     html << content_tag(:script, "setTimeout(\"$('notice').fade({duration: #{options[:fade]}});\", #{options[:display]*1000});")

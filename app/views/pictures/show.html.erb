@@ -1,5 +1,10 @@
 <div align="center" id="wrap">
-  <%= image_tag(get_pics_root + @picture.path, :class => 'small') %>
+
+  <%= image_tag(
+        pictures_root_dir + "#{@picture.user.login}/#{@picture.filename}",
+        :class => 'small'
+      ) %>
+
   <br /><br />
   <u><%= @picture.name %></u>
 </div>
