@@ -1,0 +1,7 @@
+  <% for tweet in @picture.tweets %>
+    <span class="<%= cycle('list-line-odd', 'list-line-even') %>">
+      <%= tweet.message %>
+      (by <%= tweet.user.login %>)
+    </span>
+    <br />
+  <% end %>

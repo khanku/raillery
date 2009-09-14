@@ -1,2 +1,10 @@
 img.small{ max-height: 400px; }
 img.large{ width: auto; }
+
+#comments {
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.list-line-even { background:   #ffeeff; }
+.list-line-odd { background:   #ccffcc; }

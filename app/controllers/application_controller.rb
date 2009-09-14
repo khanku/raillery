@@ -6,13 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   include AuthenticatedSystem
+  include ApplicationEnvironment  # shared functions
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
-
-  # get a setting
-  def get_setting(key)
-   @setting = Setting.find(:first, :conditions => ["key = ?", key], :limit => 1 )
-   return @setting.value
-  end
 end

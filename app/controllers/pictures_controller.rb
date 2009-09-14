@@ -14,14 +14,15 @@ class PicturesController < ApplicationController
 
   def create
     file_upload = params[:file]
+    username = self.current_user.login
 
-    if FileTest.exist?(path_to_picture(file_upload.original_filename)) \
-         || FileTest.exist?(path_to_thumbnail(file_upload.original_filename))
+    if FileTest.exist?(path_for_picture(file_upload.original_filename, username)) \
+         || FileTest.exist?(path_for_thumbnail(file_upload.original_filename, username))
 
       flash[:notice] = "This file (or a file with the same name) already exists!"
       redirect_to :action => 'new'
     else
-      File.open(path_to_picture(file_upload.original_filename), 'w') do |fh|
+      File.open(path_for_picture(file_upload.original_filename, username), 'w') do |fh|
         fh.write(file_upload.read)
       end
 
@@ -39,19 +40,23 @@ class PicturesController < ApplicationController
 
   def store(file_to_store, picture_name)
     require 'RMagick'
+    username = self.current_user.login
 
     begin
-      thumb = Magick::ImageList.new(path_to_picture(file_to_store))
+      thumb = Magick::ImageList.new(path_for_picture(file_to_store, username))
       thumb.crop_resized!(get_setting('thumb_width').to_i)
-      thumb.write(path_to_thumbnail(file_to_store))
+      thumb.write(path_for_thumbnail(file_to_store, username))
     rescue Exception => e
       puts e.message
 
+      FileUtils.rm_f(path_for_picture(file_to_store, username))
+      FileUtils.rm_f(path_for_thumbnail(file_to_store, username))
+
       flash[:notice] = "This doesn't seem to be a valid picture!"
-      redirect_to :action => 'new'
+      redirect_to :controller => 'managers'
     end
 
-    unless FileTest.exist?(path_to_thumbnail(file_to_store))
+    unless FileTest.exist?(path_for_thumbnail(file_to_store, username))
       return false;
     end
 
@@ -67,29 +72,22 @@ class PicturesController < ApplicationController
     pic.save!
 
     flash[:notice] = "Picture uploaded successfully!"
-    redirect_to :action => 'index'
+    redirect_to :controller => 'managers', :action => 'own'
   end
 
   def terminate
     @picture = Picture.find(params[:id])
+
     if (self.current_user.id == @picture.user_id)
-
-#
-# TODO:
-# - delete files
-# - delete associated comments
-#
-
-      FileUtils.rm_f(path_to_thumbnail(@picture.filename))
-      FileUtils.rm_f(path_to_picture(@picture.filename))
-
       @picture.destroy
       @errors = get_errors_for(@picture) if !@picture.errors.empty?
 
       flash[:notice] = ''
+
       if @errors
         flash[:notice] += @errors
       end
+
       flash[:notice] += "Picture deleted successfully!"
       redirect_to :controller => 'managers', :action => 'own'
     else
@@ -101,30 +99,7 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     @user = @picture.user
 
+    # custom layout with some more JS
     render :layout => 'pictures_show'
-  end
-
-  protected
-  def path_to_picture(picture_name)
-    path = Rails.root.join(
-      get_setting('public_pictures_directory'),
-      self.current_user.login
-    )
-
-    FileUtils.mkdir_p(path) if !File.exist?(path)
-
-    path + picture_name
-  end
-
-  def path_to_thumbnail(thumbnail_name)
-    path = Rails.root.join(
-      get_setting('public_pictures_directory'),
-      get_setting('thumb_path_prefix'),
-      self.current_user.login
-    )
-
-    FileUtils.mkdir_p(path) if !File.exist?(path)
-
-    path + thumbnail_name
   end
 end
