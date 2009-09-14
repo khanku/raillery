@@ -1,6 +1,8 @@
 img.small{ max-height: 400px; }
 img.large{ width: auto; }
 
+#wrap { padding-top: 10px; }
+
 #comments {
   padding: 5px;
   margin-top: 10px;

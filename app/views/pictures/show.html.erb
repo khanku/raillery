@@ -7,15 +7,11 @@
 
   <br /><br />
   <u><%= @picture.name %></u>
-  <br />
-  <%= link_to 'tweet!', new_tweet_path(:id => @picture.id) %>
 </div>
 
 <%= link_to image_tag('user.png'), @user %>
 <%= link_to @user.login, @user %>
 
 <div id="comments" align="center">
-  Tweets:
-  <br /><br />
   <%= render :partial => "shared/comments" %>
 </div>

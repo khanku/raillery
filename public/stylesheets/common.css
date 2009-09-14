@@ -23,6 +23,8 @@ img { border: 0; }
   background: #ccffcc;
 }
 
+a.black { color: #000; }
+a:hover.black { color: #fff; background-color:#000; }
 
 
 /* top board */

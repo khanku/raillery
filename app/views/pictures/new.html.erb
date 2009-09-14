@@ -2,7 +2,8 @@
 
 <div class="upload-box">
 
-<% form_for :picture, :html => { :multipart => true }, :url => { :action => :create } do |f| %>
+<% form_for :picture, :html => { :multipart => true }, \
+    :url => { :action => :create } do |f| %>
 
   1/ Find it on your computer:<br /><br />
   <%= file_field(:picture, :file) %>

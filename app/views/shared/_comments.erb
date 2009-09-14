@@ -1,7 +1,42 @@
-  <% for tweet in @picture.tweets %>
-    <span class="<%= cycle('list-line-odd', 'list-line-even') %>">
-      <%= tweet.message %>
-      (by <%= tweet.user.login %>)
-    </span>
-    <br />
+<% if @picture.tweets.empty? %>
+
+  <i>There is no tweet about this picture right now...</i>
+  <br />
+  Be the first to
+  <%= link_to_remote 'tweet!', :update => 'new-comment', \
+        :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
+        :html => { :class => 'black' } %>
+
+  <div id="new-comment"></div>
+
+<% else %>
+
+  <% tweets_count = @picture.tweets.size %>
+  <% if tweets_count > 1 %>
+    There are <b><%= tweets_count %></b> tweets about this picture.
+  <% else %>
+    There is a tweet about this picture.
   <% end %>
+  <br />
+  You can
+  <%= link_to_remote 'tweet', :update => 'new-comment', \
+        :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
+        :html => { :class => 'black' }  %>
+  as well!
+  <br />
+  <div id="new-comment"></div>
+  <br /><br />
+
+  <% for tweet in @picture.tweets.reverse %>
+    <span class="<%= cycle('list-line-odd', 'list-line-even') %>">
+      « <i><%= tweet.message %></i> »
+      <br />
+      <font size="-1">
+        (by <%= link_to tweet.user.login, user_path, :class => 'black' %>
+         on <%= tweet.created_at %>)
+      </font>
+    </span>
+    <br /><br />
+  <% end %>
+
+<% end %>

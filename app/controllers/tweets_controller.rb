@@ -1,13 +1,11 @@
 class TweetsController < ApplicationController
 
-  before_filter :login_required, :except => [ :new, :create ]
+  before_filter :login_required
   verify :method => :post,
-         :except => [ :new, :show ],
-         :redirect_to => { :action => 'show' }
+         :except => [ :new ],
+         :redirect_to => { :controller => '/' }
 
-  def show
-    @tweets = Tweet.find_all_by_picture_id(params[:id])
-  end
+  layout nil
 
   def new
     @tweet = Tweet.new
@@ -15,19 +13,30 @@ class TweetsController < ApplicationController
   end
 
   def create
-    p = Picture.find(params[:tweet][:picture_id], :limit => 1)
-    if p.nil?
-      flash[:notice] = 'invalid picture id'
-      redirect_to :root
+    begin
+      p = Picture.find(params[:tweet][:picture_id], :limit => 1)
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "This picture doesn't exist!"
     end
 
-    @tweet = Tweet.create(
-      :message => params[:tweet][:message],
-      :user_id => self.current_user.id,
-      :picture_id => params[:tweet][:picture_id]
-    )
-    @tweet.save!
+    if params[:tweet][:message].empty?
+      flash[:notice] = "Please write something."
+    elsif p.nil?
+      redirect_to :root
+    else
+      tweet = Tweet.create(
+        :message => params[:tweet][:message],
+        :user_id => self.current_user.id,
+        :picture_id => params[:tweet][:picture_id]
+      )
+      tweet.save
 
-    redirect_to :root
+      if !tweet.errors.empty?
+        flash[:notice] << get_errors_for(tweet)
+      end
+    end
+
+    redirect_to picture_path(p)
   end
+
 end
