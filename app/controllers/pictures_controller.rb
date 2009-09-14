@@ -13,20 +13,28 @@ class PicturesController < ApplicationController
   end
 
   def create
-    file_upload = params[:file]
-    username = self.current_user.login
-
-    if FileTest.exist?(path_for_picture(file_upload.original_filename, username)) \
-         || FileTest.exist?(path_for_thumbnail(file_upload.original_filename, username))
-
-      flash[:notice] = "This file (or a file with the same name) already exists!"
+    if params[:picture][:file].nil?
+      flash[:notice] = "Please specify a picture to upload!"
+      redirect_to :action => 'new'
+    elsif params[:picture][:name].empty?
+      flash[:notice] = "Please give a name to the picture you want to upload."
       redirect_to :action => 'new'
     else
-      File.open(path_for_picture(file_upload.original_filename, username), 'w') do |fh|
-        fh.write(file_upload.read)
-      end
+      file_upload = params[:picture][:file]
+      username = self.current_user.login
 
-      store(file_upload.original_filename, params[:image][:name])
+      if FileTest.exist?(path_for_picture(file_upload.original_filename, username)) \
+          || FileTest.exist?(path_for_thumbnail(file_upload.original_filename, username))
+
+        flash[:notice] = "This file (or a file with the same name) already exists!"
+        redirect_to :action => 'new'
+      else
+        File.open(path_for_picture(file_upload.original_filename, username), 'w') do |fh|
+          fh.write(file_upload.read)
+        end
+
+        store(file_upload.original_filename, params[:picture][:name])
+      end
     end
   end
 
@@ -60,18 +68,22 @@ class PicturesController < ApplicationController
       return false;
     end
 
-    if picture_name.empty?
-      picture_name = 'unnamed picture'
-    end
-
     pic = Picture.create(
       :name => picture_name,
       :filename => file_to_store,
       :user_id => self.current_user.id
     )
-    pic.save!
+    pic.save
 
-    flash[:notice] = "Picture uploaded successfully!"
+    errors = get_errors_for(pic) if !pic.errors.empty?
+
+    flash[:notice] = ''
+    if errors
+      flash[:notice] += errors
+    else
+      flash[:notice] = "Picture uploaded successfully!"
+    end
+
     redirect_to :controller => 'managers', :action => 'own'
   end
 
@@ -80,12 +92,11 @@ class PicturesController < ApplicationController
 
     if (self.current_user.id == @picture.user_id)
       @picture.destroy
-      @errors = get_errors_for(@picture) if !@picture.errors.empty?
+      errors = get_errors_for(@picture) if !@picture.errors.empty?
 
       flash[:notice] = ''
-
-      if @errors
-        flash[:notice] += @errors
+      if errors
+        flash[:notice] += errors
       end
 
       flash[:notice] += "Picture deleted successfully!"

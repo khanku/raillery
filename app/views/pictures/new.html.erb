@@ -1,13 +1,22 @@
-< <%= link_to 'back to the manager', managers_path %>
-<br /><br />
+<h2>Upload a new picture:</h2>
 
-<% form_tag({:action => 'create'}, :multipart => true) do %>
-  <input type=file name="file" id="file_upload">
+<div class="upload-box">
 
-  <br /><br />
-  Name:<br />
-  <%= text_field 'image', 'name', :size => 40 %>
+<% form_for :picture, :html => { :multipart => true }, :url => { :action => :create } do |f| %>
 
-  <br /><br />
-  <%= submit_tag "Create" %>
+  1/ Find it on your computer:<br /><br />
+  <%= file_field(:picture, :file) %>
+
+  <br /><br /><br />
+
+  2/ Give it a friendly name:<br /><br />
+  <%= f.text_field :name, :size => 40 %>
+
+  <br /><br /><br />
+
+  3/ All done!<br /><br />
+  <%= submit_tag "Upload" %>
+
 <% end %>
+
+</div>

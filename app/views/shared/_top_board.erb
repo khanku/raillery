@@ -1,24 +1,31 @@
 <div id="top-board">
 
-  <div id="userbox">
-    <span style="position: relative; left: -50px;">
-      <%= link_to image_tag('home.png'), :root %>
-      <%= link_to 'home', :root %>
-    </span>
+  <table width="100%" border="0">
+    <tr>
+      <td width="20%">
+        <%= link_to image_tag('raillery.png', :alt => 'raillery home'), :root %>
+      </td>
+      <td>
 
-    <% if logged_in? %>
-    Welcome back, 
-      <%= self.current_user.login + '!' %>
-      (<%= link_to 'logout', logout_path %>)
-      &nbsp;&nbsp;-&nbsp;
-      <%= link_to 'Manage', managers_path %>
-      your pictures
-    <% else %>
-      Hello, you could
-      <%= link_to_remote( "login", :update => "div_ajax", :url => login_path ) %>
-      or <%= link_to_remote( "register", :update => "div_ajax", :url => new_user_path ) %>.
-    <% end %>
-  </div>
+        <div id="userbox">
+
+          <% if logged_in? %>
+          Welcome back, 
+            <%= self.current_user.login + '!' %>
+            (<%= link_to 'logout', logout_path %>)
+            &nbsp;&nbsp;-&nbsp;
+            <%= link_to 'Manage', managers_path %>
+            your pictures
+          <% else %>
+            Hello, you could
+            <%= link_to_remote( "login", :update => "div_ajax", :url => login_path ) %>
+            or <%= link_to_remote( "register", :update => "div_ajax", :url => new_user_path ) %>.
+          <% end %>
+        </div>
+
+      </td>
+    </tr>
+  </table>
 
 </div>
 
