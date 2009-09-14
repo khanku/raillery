@@ -2,10 +2,16 @@
 
   <i>There is no tweet about this picture right now...</i>
   <br />
-  Be the first to
-  <%= link_to_remote 'tweet!', :update => 'new-comment', \
-        :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
-        :html => { :class => 'black' } %>
+
+  <% if logged_in? %>
+    Be the first to
+    <%= link_to_remote 'tweet!', :update => 'new-comment', \
+          :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
+          :html => { :class => 'black' } %>
+  <% else %>
+    <%= link_to 'Login', login_path, :class => 'black' %>
+    and be the first to tweet!
+  <% end %>
 
   <div id="new-comment"></div>
 
@@ -18,11 +24,18 @@
     There is a tweet about this picture.
   <% end %>
   <br />
-  You can
-  <%= link_to_remote 'tweet', :update => 'new-comment', \
-        :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
-        :html => { :class => 'black' }  %>
-  as well!
+
+  <% if logged_in? %>
+    You can
+    <%= link_to_remote 'tweet', :update => 'new-comment', \
+          :url => { :controller => 'tweets', :action => 'new', :id => @picture.id }, \
+          :html => { :class => 'black' }  %>
+    as well!
+  <% else %>
+    <%= link_to 'Login', login_path, :class => 'black' %>
+    so you can tweet as well!
+  <% end %>
+
   <br />
   <div id="new-comment"></div>
   <br /><br />

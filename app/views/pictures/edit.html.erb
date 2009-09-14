@@ -1,0 +1,20 @@
+<h2>Edit the picture properties</h2>
+
+<div class="centered-box">
+
+  <%= image_tag(pictures_thumb_dir + "#{@picture.user.login}/#{@picture.filename}") %>
+  <br /><br />
+
+  <% form_for(@picture) do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      <%= f.label :name %>:<br />
+      <%= f.text_field :name, :size => 20 %>
+    </p>
+
+    <br />
+    <%= f.submit 'save' %>
+  <% end %>
+
+</div>
