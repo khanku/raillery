@@ -1,0 +1,27 @@
+<div class="ajax-box">
+<div class="ajax-content">
+
+<% form_tag session_path do -%>
+
+  <div style="float: left;">
+    <label for="login">Login:</label>
+    <br />
+    <label for="password">Password:</label>
+    <br />
+    <label for="remember_me">Remember me:</label>
+    <br />
+  </div>
+
+  <%= text_field_tag 'login', '', :size => 15 %>
+  <br />
+  <%= password_field_tag 'password', '', :size => 15 %>
+  <br />
+  <%= check_box_tag 'remember_me' %>
+  <br />
+
+  <%= submit_tag 'Log in' %>
+
+<% end -%>
+
+</div>
+</div>

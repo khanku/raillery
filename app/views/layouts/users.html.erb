@@ -6,18 +6,12 @@
     <meta http-equiv="content-type" content="text/html;charset=iso8859-15" />
     <title>Browse: <%= controller.action_name %></title>
 
-    <%= javascript_include_tag "prototype" %>
-    <%= javascript_include_tag 'lightbox/scriptaculous.js?load=effects,builder',
-                               'lightbox/lightbox.js' %>
-
     <%= stylesheet_link_tag 'common' %>
     <%= stylesheet_link_tag 'users' %>
-    <%= stylesheet_link_tag 'lightbox' %>
   </head>
 
   <body>
 
-    <%= render :partial => "shared/top_board" %>
     <%= render :partial => "shared/flash_notice" %>
 
   <%= yield  %>

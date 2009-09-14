@@ -2,10 +2,11 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  layout "users", :except => :new
-
-  # render new.rhtml
   def new
+  end
+
+  def new_ajax
+    render :action => 'new_ajax', :layout => false
   end
 
   def create
@@ -26,6 +27,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    render :action => 'new', :layout => 'users_show'
+
     user = User.find(params[:id])
     @username = user.login
 
@@ -38,10 +41,10 @@ class UsersController < ApplicationController
     offset = (@page - 1) * @pictures_per_page
 
     @pictures = Picture.find_all_by_user_id(user.id,
-					    :order  => "created_at DESC",
-					    :limit  => @pictures_per_page,
-					    :offset => offset
-					   )
+              :order  => "created_at DESC",
+              :limit  => @pictures_per_page,
+              :offset => offset
+             )
     @pictures_count = user.pictures.count
     @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
   end

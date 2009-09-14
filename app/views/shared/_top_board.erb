@@ -18,8 +18,8 @@
             your pictures
           <% else %>
             Hello, you could
-            <%= link_to_remote( "login", :update => "div_ajax", :url => login_path ) %>
-            or <%= link_to_remote( "register", :update => "div_ajax", :url => new_user_path ) %>.
+            <%= link_to_remote( "login", :update => "div_ajax", :url => login_ajax_path ) %>
+            or <%= link_to_remote( "register", :update => "div_ajax", :url => signup_ajax_path ) %>.
           <% end %>
         </div>
 

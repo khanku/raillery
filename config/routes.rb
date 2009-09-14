@@ -52,6 +52,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # custom routes for authentication
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.signup_ajax '/signup_ajax', :controller => 'users', :action => 'new_ajax'
   map.login  '/login',  :controller => 'sessions', :action => 'new'
+  map.login_ajax  '/login_ajax',  :controller => 'sessions', :action => 'new_ajax'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 end

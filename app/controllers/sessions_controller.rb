@@ -3,10 +3,11 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  layout "sessions", :except => :new
-
-  # render new.rhtml
   def new
+  end
+
+  def new_ajax
+    render :action => 'new_ajax', :layout => false
   end
 
   def create
@@ -19,7 +20,8 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully."
     else
-      render :action => 'new'
+      flash[:notice] = "Login failed. Please have a try again."
+      redirect_to :root
     end
   end
 
