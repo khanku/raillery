@@ -24,7 +24,7 @@ class AddDefaultSettings < ActiveRecord::Migration
 
     Setting.create(
       :key => 'pictures_per_page',
-      :value => '16'
+      :value => '12'
     )
 
   end

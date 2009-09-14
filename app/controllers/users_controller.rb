@@ -27,8 +27,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    render :action => 'new', :layout => 'users_show'
-
     user = User.find(params[:id])
     @username = user.login
 
@@ -47,6 +45,8 @@ class UsersController < ApplicationController
              )
     @pictures_count = user.pictures.count
     @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
+
+    render :action => 'show', :layout => 'users_show'
   end
 
   def index
