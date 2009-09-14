@@ -1,13 +1,11 @@
 class PicturesController < ApplicationController
 
-  before_filter :login_required, :except => [ :index, :show ]
-  verify :method => :post,
-         :except => [ :index, :show, :new ],
-         :redirect_to => { :action => 'index' }
+  before_filter :login_required, :except => [ :show ]
 
-  def index
-    redirect_to :root
-  end
+  verify :method => :post,
+         :except => [ :show, :new, :edit, :update ],
+         :redirect_to => { :action => 'index' }
+  verify :method => :put, :only => :update
 
   def new
   end
@@ -113,4 +111,20 @@ class PicturesController < ApplicationController
     # custom layout with some more JS
     render :layout => 'pictures_show'
   end
+
+  def edit
+    @picture = Picture.find(params[:id])
+  end
+
+  def update
+    @picture = Picture.find(params[:id])
+
+    if @picture.update_attributes(params[:picture])
+      flash[:notice] = 'Picture successfully updated.'
+      redirect_to @picture
+    else
+      render :action => 'edit'
+    end
+  end
+
 end

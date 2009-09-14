@@ -24,6 +24,10 @@
             :confirm => 'Are you sure about that?',
             :method => :post %>
     </span>
+
+    <span style="position: relative; top: -44px; left: -42px">
+      <%= link_to image_tag('edit.png'), edit_picture_path(picture) %>
+    </span>
     &nbsp;&nbsp;
 
     <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>

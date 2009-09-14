@@ -11,7 +11,7 @@ img.large{ width: auto; }
 .list-line-even { background:   #ffeeff; }
 .list-line-odd { background:   #ccffcc; }
 
-.upload-box {
+.centered-box {
   text-align: center;
   margin-top: 30px;
   font-size: 80%;
