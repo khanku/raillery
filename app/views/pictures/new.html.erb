@@ -16,12 +16,12 @@
   <br /><br /><br />
 
   3/ Choose an album for this picture:<br /><br />
-  <%= select_tag 'picture[album_id]', albums_list(nil) %>
+  <%= select_tag 'picture[album_id]', albums_list(@user, nil) %>
 
   <br /><br /><br />
 
   4/ All done!<br /><br />
-  <%= submit_tag "Upload" %>
+  <%= submit_tag "Upload", :disable_with => "Uploading, please wait..." %>
 
 <% end %>
 

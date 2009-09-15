@@ -12,6 +12,8 @@ class PicturesController < ApplicationController
       flash[:notice] = 'Please create an album first.'
       redirect_to new_album_path
     end
+
+    @user = self.current_user
   end
 
   def create
@@ -20,6 +22,9 @@ class PicturesController < ApplicationController
       redirect_to :action => 'new'
     elsif params[:picture][:name].empty?
       flash[:notice] = "Please give a name to the picture you want to upload."
+      redirect_to :action => 'new'
+    elsif !self.current_user.album_ids.include?(params[:picture][:album_id].to_i)
+      flash[:notice] = "Choose one of your albums, please."
       redirect_to :action => 'new'
     else
       file_upload = params[:picture][:file]
@@ -132,6 +137,7 @@ class PicturesController < ApplicationController
 
   def edit
     @picture = Picture.find(params[:id])
+    @user = self.current_user
   end
 
   def update

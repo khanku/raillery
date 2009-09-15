@@ -1,11 +1,11 @@
-<h1><%=h @album.name %></h1>
+<h1><%= @album.user.login %>'s album: <%=h @album.name %></h1>
 
 <h2><%=h @album.description %></h2>
 
 <div align="center">
 
 <% if @pictures.size == 0 %>
-  <i>No pictures found.</i>
+  <i>There are no pictures in this album yet.</i>
 <% else %>
 
   <div id="images-frame">

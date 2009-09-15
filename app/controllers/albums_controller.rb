@@ -69,15 +69,11 @@ class AlbumsController < ApplicationController
     @album = Album.new(params[:album])
     @album.user_id = self.current_user.id
 
-    respond_to do |format|
-      if @album.save
-        flash[:notice] = 'Album was successfully created.'
-        format.html { redirect_to(@album) }
-        format.xml  { render :xml => @album, :status => :created, :location => @album }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @album.errors, :status => :unprocessable_entity }
-      end
+    if @album.save
+      flash[:notice] = 'Album was successfully created.'
+      redirect_to managers_path
+    else
+      render :action => "new"
     end
   end
 
