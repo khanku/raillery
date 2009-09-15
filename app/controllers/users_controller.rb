@@ -38,12 +38,12 @@ class UsersController < ApplicationController
     @pictures_per_page = get_setting('pictures_per_page').to_i
     offset = (@page - 1) * @pictures_per_page
 
-    @pictures = Picture.find_all_by_user_id(user.id,
+    @albums = Album.find_all_by_user_id(user.id,
               :order  => "created_at DESC",
               :limit  => @pictures_per_page,
               :offset => offset
              )
-    @pictures_count = user.pictures.count
+    @pictures_count = user.albums.count
     @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
 
     render :action => 'show', :layout => 'users_show'

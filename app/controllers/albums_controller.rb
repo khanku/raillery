@@ -17,11 +17,33 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.xml
   def show
-    @album = Album.find(params[:id])
+    begin
+      @album = Album.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = 'This album does not exist!'
+    end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @album }
+    if @album.nil?
+      redirect_to :root 
+    else
+
+      @page = params[:page].to_i ||= 1
+      if (@page < 1)
+        @page = 1
+      end
+
+      @pictures_per_page = get_setting('pictures_per_page').to_i
+      offset = (@page - 1) * @pictures_per_page
+
+      @pictures = Picture.find_all_by_album_id(
+                    params[:id],
+                    :order  => "created_at DESC",
+                    :limit  => @pictures_per_page,
+                    :offset => offset
+                  )
+
+      @pictures_count = @album.pictures.count
+      @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
     end
   end
 

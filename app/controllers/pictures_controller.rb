@@ -109,11 +109,21 @@ class PicturesController < ApplicationController
   end
 
   def show
-    @picture = Picture.find(params[:id])
-    @user = @picture.user
+    begin
+      @picture = Picture.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = 'This picture does not exist!'
+    end
 
-    # custom layout with some more JS
-    render :layout => 'pictures_show'
+    if @album.nil?
+      redirect_to :root 
+    else
+
+      @user = @picture.user
+
+      # custom layout with some more JS
+      render :layout => 'pictures_show'
+    end
   end
 
   def edit

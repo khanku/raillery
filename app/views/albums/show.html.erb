@@ -2,4 +2,36 @@
 
 <h2><%=h @album.description %></h2>
 
+<div align="center">
+
+<% if @pictures.size == 0 %>
+  <i>No pictures found.</i>
+<% else %>
+
+  <div id="images-frame">
+
+  <% number_of_pictures = 0 %>
+  <% for picture in @pictures %>
+  <% number_of_pictures += 1 %>
+
+    <%= link_to image_tag(pictures_thumb_dir + "#{picture.user.login}/#{picture.filename}"),
+          pictures_root_dir + "#{picture.user.login}/#{picture.filename}",
+          { :rel => "lightbox[pictures]", :title => picture.name } %>
+    <%= link_to image_tag("details.png"), picture_path(picture) %>
+
+    &nbsp;&nbsp;
+
+    <% if (number_of_pictures % @pictures_in_a_row.to_i == 0) %>
+    <br />
+    <% end %>
+
+  <% end %>
+
+  </div>
+
+  <%= render :partial => "shared/pages_navigation" %>
+
+<% end %>
+
+</div>
 

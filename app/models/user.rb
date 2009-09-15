@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   has_many :pictures
+  has_many :albums
   has_many :tweets
 
   # prevents a user from submitting a crafted form that bypasses activation
