@@ -10,7 +10,7 @@
 </div>
 
 <%= link_to image_tag('user.png'), @user %>
-<%= link_to @user.login, @user %>
+<%= link_to @user.login, @user, :class => 'black' %>
 
 <div id="comments" align="center">
   <%= render :partial => "shared/comments" %>
