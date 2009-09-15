@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20090915102734) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "categorie_id", :default => 0
+    t.integer  "album_id",   :default => 0
   end
 
   create_table "settings", :force => true do |t|
