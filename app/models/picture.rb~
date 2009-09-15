@@ -1,6 +1,5 @@
 class Picture < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :album
+  belongs_to :user, :album
   has_many :tweets
 
   validates_presence_of   :name, :filename, :user_id

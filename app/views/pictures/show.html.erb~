@@ -9,9 +9,9 @@
   <u><%= @picture.name %></u>
 </div>
 
-<%= link_to image_tag('user-small.png'), @user %>
+<%= link_to image_tag('user.png'), @user %>
 <%= link_to @user.login, @user, :class => 'black' %>
-<br />
+&nbsp;
 <%= link_to image_tag('album.png'), @picture.album %>
 <%= link_to @picture.album.name, @picture.album, :class => 'black' %>
 

@@ -6,4 +6,10 @@ module PictureHelper
      )
   end
 
+  def albums_list
+    options_from_collection_for_select(
+      Album.find(:all, :order => :name), 'id', 'name'
+    )
+  end
+
 end
