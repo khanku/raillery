@@ -16,7 +16,10 @@
   <% for album in @albums %>
   <% number_of_albums += 1 %>
 
-      <%= link_to image_tag("album.png"), album_path(album) %>
+      <span style="position: relative; top: -70px;">
+        <%= image_tag('album.png') %>
+      </span>
+      <%= link_to album_title_picture(album), album_path(album) %>
       &nbsp;&nbsp;
 
       <% if (number_of_albums % @pictures_in_a_row == 0) %>

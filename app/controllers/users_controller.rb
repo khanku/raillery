@@ -43,7 +43,8 @@ class UsersController < ApplicationController
               :limit  => @pictures_per_page,
               :offset => offset
              )
-    @pictures_count = user.albums.count
+    @pictures_count = user.pictures.count
+    @album_counts = user.albums.count
     @pictures_in_a_row = get_setting('pictures_in_a_row').to_i
 
     render :action => 'show', :layout => 'users_show'

@@ -1,6 +1,6 @@
 class AddAlbumIdToPicture < ActiveRecord::Migration
   def self.up
-    add_column :pictures, :album_id, :integer, :default => 1
+    add_column :pictures, :album_id, :integer
   end
 
   def self.down

@@ -1,10 +1,10 @@
 class AlbumsController < ApplicationController
 
-  before_filter :login_required, :except => [ :show ]
+  before_filter :login_required, :except => [ :index, :show ]
 
   verify :method => :post,
-         :except => [ :show, :new, :edit, :update ],
-         :redirect_to => :root
+         :except => [ :index, :show, :new, :edit, :update ],
+         :redirect_to => { :controller => 'browse' }
   verify :method => :put, :only => :update
 
 

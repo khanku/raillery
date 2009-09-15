@@ -35,7 +35,10 @@ class PicturesController < ApplicationController
           fh.write(file_upload.read)
         end
 
-        store(file_upload.original_filename, params[:picture][:name])
+        store(file_upload.original_filename,
+              params[:picture][:name],
+              params[:picture][:album_id]
+             )
       end
     end
   end
@@ -48,7 +51,7 @@ class PicturesController < ApplicationController
     
   end
 
-  def store(file_to_store, picture_name)
+  def store(file_to_store, picture_name, album_id)
     require 'RMagick'
     username = self.current_user.login
 
@@ -73,7 +76,8 @@ class PicturesController < ApplicationController
     pic = Picture.create(
       :name => picture_name,
       :filename => file_to_store,
-      :user_id => self.current_user.id
+      :user_id => self.current_user.id,
+      :album_id => album_id
     )
     pic.save
 
@@ -115,8 +119,8 @@ class PicturesController < ApplicationController
       flash[:notice] = 'This picture does not exist!'
     end
 
-    if @album.nil?
-      redirect_to :root 
+    if @picture.nil?
+      redirect_to :root
     else
 
       @user = @picture.user
