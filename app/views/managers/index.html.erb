@@ -12,10 +12,20 @@
         <li>import a folder (<i>coming soon</i>)</li>
         <li>download from URL (<i>coming soon</i>)</li>
 
+        <br />
+        <li>
+          <%= link_to image_tag('album.png'), new_album_path %>
+          <%= link_to 'create an album', new_album_path %>
+        </li>
+
         <br /><br />
         <li>
           <%= link_to image_tag('manager.png'), own_managers_path %>
           <%= link_to 'manage your pictures', own_managers_path %>
+        </li>
+        <li>
+          <%= link_to image_tag('album.png'), albums_path %>
+          <%= link_to 'manage your albums', albums_path %>
         </li>
       </ul>
 

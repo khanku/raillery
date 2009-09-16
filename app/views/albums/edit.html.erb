@@ -4,12 +4,12 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name %>:<br />
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.label :description %><br />
+    <%= f.label :description %>:<br />
     <%= f.text_area :description, :rows => 5 %>
   </p>
 
@@ -17,5 +17,3 @@
     <%= f.submit 'Update' %>
   </p>
 <% end %>
-
-<%= link_to 'Back', albums_path %>

@@ -1,0 +1,11 @@
+<h1>Your albums:</h1>
+
+<% for album in @albums %>
+  <%= link_to h(album.name), album_path(album), :class => 'black' %>
+  &nbsp;-&nbsp;
+  <%= link_to 'edit', edit_album_path(album), :class => 'black' %>
+  <%= link_to 'destroy', album,
+        :confirm => 'The album and ALL the pictures it contains will be DELETED.',
+        :method => :delete, :class => 'black' %>
+  <br />
+<% end %>

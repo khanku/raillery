@@ -8,14 +8,15 @@ class AlbumsController < ApplicationController
   verify :method => :put, :only => :update
 
 
-  # GET /albums
-  # GET /albums.xml
   def index
-    redirect_to :root
+    if !logged_in?
+      flash[:notice] = 'Please login to manage your albums.'
+      redirect_to :root
+    else
+      @albums = self.current_user.albums
+    end
   end
 
-  # GET /albums/1
-  # GET /albums/1.xml
   def show
     begin
       @album = Album.find(params[:id])
@@ -47,24 +48,14 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # GET /albums/new
-  # GET /albums/new.xml
   def new
     @album = Album.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @album }
-    end
   end
 
-  # GET /albums/1/edit
   def edit
     @album = Album.find(params[:id])
   end
 
-  # POST /albums
-  # POST /albums.xml
   def create
     @album = Album.new(params[:album])
     @album.user_id = self.current_user.id
