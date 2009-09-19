@@ -1,11 +1,20 @@
 <h1>Your albums:</h1>
 
-<% for album in @albums %>
-  <%= link_to h(album.name), album_path(album), :class => 'black' %>
-  &nbsp;-&nbsp;
-  <%= link_to 'edit', edit_album_path(album), :class => 'black' %>
-  <%= link_to 'destroy', album,
-        :confirm => 'The album and ALL the pictures it contains will be DELETED.',
-        :method => :delete, :class => 'black' %>
-  <br />
+<% if @albums.size == 0 %>
+
+  You don't have any album yet.<br />
+  <%= link_to 'Create', new_album_path, :class => 'black' %> one!
+
+<% else %>
+
+  <% for album in @albums %>
+    <%= link_to h(album.name), album_path(album), :class => 'black' %>
+    &nbsp;-&nbsp;
+    <%= link_to 'edit', edit_album_path(album), :class => 'black' %>
+    <%= link_to 'destroy', album,
+          :confirm => 'The album and ALL the pictures it contains will be DELETED.',
+          :method => :delete, :class => 'black' %>
+    <br />
+  <% end %>
+
 <% end %>
