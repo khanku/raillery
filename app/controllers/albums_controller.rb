@@ -88,12 +88,9 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.xml
   def destroy
-    @album = Album.find(params[:id])
-    @album.destroy
+    album = Album.find(params[:id])
+    album.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(albums_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to albums_url
   end
 end
