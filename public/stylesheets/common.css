@@ -15,11 +15,11 @@ table { border: 0; }
 img { border: 0; }
 
 
-#pitcure-list .list-line-even {
+.list-line-even {
   background: #e0f8f8;
 }
 
-#picture-list .list-line-odd {
+.list-line-odd {
   background: #ccffcc;
 }
 
@@ -104,5 +104,4 @@ a:hover.black { color: #fff; background-color:#000; }
 .centered-box {
   text-align: center;
   margin-top: 30px;
-  font-size: 80%;
 }
