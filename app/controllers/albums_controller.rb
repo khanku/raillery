@@ -3,9 +3,10 @@ class AlbumsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show ]
 
   verify :method => :post,
-         :except => [ :index, :show, :new, :edit, :update ],
+         :except => [ :index, :show, :new, :edit, :update, :destroy ],
          :redirect_to => { :controller => 'browse' }
   verify :method => :put, :only => :update
+  verify :method => :delete, :only => :destroy
 
 
   def index
