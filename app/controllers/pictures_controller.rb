@@ -17,6 +17,8 @@ class PicturesController < ApplicationController
   end
 
   def create
+    
+#     Validierung
     if params[:picture][:file].nil?
       flash[:notice] = "Please specify a picture to upload!"
       redirect_to :action => 'new'
@@ -56,6 +58,7 @@ class PicturesController < ApplicationController
     
   end
 
+#   Auslagern
   def store(file_to_store, picture_name, album_id)
     require 'RMagick'
     username = self.current_user.login
