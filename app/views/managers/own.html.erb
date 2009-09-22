@@ -15,7 +15,7 @@
   <% number_of_pictures += 1 %>
 
     <%= link_to image_tag(pictures_thumb_dir + "#{picture.user.login}/#{picture.filename}"),
-          picture_path(picture) %>
+          picture_path(picture), :title => picture.name %>
 
     <%= link_to image_tag('delete.png'), terminate_picture_path(picture),
           :confirm => 'Are you sure about that?',

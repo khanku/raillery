@@ -19,7 +19,7 @@
       <span style="position: relative; top: -70px;">
         <%= image_tag('album.png') %>
       </span>
-      <%= link_to album_title_picture(album), album_path(album) %>
+      <%= link_to album_title_picture(album), album_path(album), :title => album.name %>
       &nbsp;&nbsp;
 
       <% if (number_of_albums % @pictures_in_a_row == 0) %>
