@@ -17,69 +17,32 @@ class PicturesController < ApplicationController
   end
 
   def create
-    
-#     Validierung
-    if params[:picture][:file].nil?
-      flash[:notice] = "Please specify a picture to upload!"
-      redirect_to :action => 'new'
-    elsif params[:picture][:name].empty?
-      flash[:notice] = "Please give a name to the picture you want to upload."
-      redirect_to :action => 'new'
-    elsif !self.current_user.album_ids.include?(params[:picture][:album_id].to_i)
-      flash[:notice] = "Choose one of your albums, please."
+    file_upload = params[:picture][:file]
+    username = self.current_user.login
+
+    if FileTest.exist?(path_for_picture(file_upload.original_filename, username)) \
+        || FileTest.exist?(path_for_thumbnail(file_upload.original_filename, username))
+
+      flash[:notice] = "This file (or a file with the same name) already exists!"
       redirect_to :action => 'new'
     else
-      file_upload = params[:picture][:file]
-      username = self.current_user.login
+      File.open(path_for_picture(file_upload.original_filename, username), 'w') do |fh|
+        fh.write(file_upload.read)
+      end
 
-      if FileTest.exist?(path_for_picture(file_upload.original_filename, username)) \
-          || FileTest.exist?(path_for_thumbnail(file_upload.original_filename, username))
+      if ( store(file_upload.original_filename, params[:picture][:name],
+             params[:picture][:album_id]) != 0 )
 
-        flash[:notice] = "This file (or a file with the same name) already exists!"
-        redirect_to :action => 'new'
+        FileUtils.rm_f(path_for_picture(file_upload.original_filename, username))
+        redirect_to :controller => 'pictures', :action => 'new'
       else
-        File.open(path_for_picture(file_upload.original_filename, username), 'w') do |fh|
-          fh.write(file_upload.read)
-        end
-
-        store(file_upload.original_filename,
-              params[:picture][:name],
-              params[:picture][:album_id]
-             )
+        redirect_to :controller => 'managers', :action => 'own'
       end
     end
   end
 
-  def import
-    
-  end
-
-  def download
-    
-  end
-
-#   Auslagern
+# TODO: Auslagern
   def store(file_to_store, picture_name, album_id)
-    require 'RMagick'
-    username = self.current_user.login
-
-    begin
-      thumb = Magick::ImageList.new(path_for_picture(file_to_store, username))
-      thumb.crop_resized!(get_setting('thumb_width').to_i)
-      thumb.write(path_for_thumbnail(file_to_store, username))
-    rescue Exception => e
-      puts e.message
-
-      FileUtils.rm_f(path_for_picture(file_to_store, username))
-      FileUtils.rm_f(path_for_thumbnail(file_to_store, username))
-
-      flash[:notice] = "This doesn't seem to be a valid picture!"
-      redirect_to :controller => 'managers'
-    end
-
-    unless FileTest.exist?(path_for_thumbnail(file_to_store, username))
-      return false;
-    end
 
     pic = Picture.create(
       :name => picture_name,
@@ -89,16 +52,31 @@ class PicturesController < ApplicationController
     )
     pic.save
 
-    errors = get_errors_for(pic) if !pic.errors.empty?
-
-    flash[:notice] = ''
-    if errors
-      flash[:notice] += errors
+    if !pic.errors.empty?
+      flash[:notice] = get_errors_for(pic)
+      return 1
     else
       flash[:notice] = "Picture uploaded successfully!"
-    end
 
-    redirect_to :controller => 'managers', :action => 'own'
+      require 'RMagick'
+      username = self.current_user.login
+
+      begin
+        thumb = Magick::ImageList.new(path_for_picture(file_to_store, username))
+        thumb.crop_resized!(get_setting('thumb_width').to_i)
+        thumb.write(path_for_thumbnail(file_to_store, username))
+      rescue Exception => e
+        puts e.message
+
+        FileUtils.rm_f(path_for_picture(file_to_store, username))
+        FileUtils.rm_f(path_for_thumbnail(file_to_store, username))
+
+        flash[:notice] = "This doesn't seem to be a valid picture!"
+        return 2
+      end
+
+      return 0
+    end
   end
 
   def terminate
