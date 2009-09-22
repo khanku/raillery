@@ -21,7 +21,10 @@ module ApplicationHelper
       str += "\n"
     end
 
-    last_page = @pictures_count / @pictures_per_page + 1
+    last_page = @pictures_count / @pictures_per_page
+    if (@pictures_count % @pictures_per_page != 0)
+      last_page += 1
+    end
 
     if(@page > 1 || last_page > 1)
       str += "[#{@page}]"
@@ -41,7 +44,7 @@ module ApplicationHelper
       str += "<br />\n"
       str += content_tag(
         :div,
-        "(#{last_page} pages totalizing #{@pictures_count} pictures)",
+        "(#{last_page} pages totalizing #{@pictures_count} items)",
         :class => 'footnote'
       )
       str += "\n"
