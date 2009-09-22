@@ -1,6 +1,7 @@
 module ApplicationEnvironment
 
   protected
+
     def get_setting(key)
       @setting = Setting.find(:first, :conditions => ["key = ?", key], :limit => 1 )
       return @setting.value
